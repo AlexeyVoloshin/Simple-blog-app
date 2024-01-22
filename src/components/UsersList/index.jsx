@@ -4,7 +4,6 @@ import { ROUTES } from '../../common/routes/navigate';
 import clsx from 'clsx';
 
 export const UsersList = ({ users, sorting }) => {
-  console.log('sorting: ', sorting);
   return (
     <div className="col-start-1 row-start-3 px-4 py-2 ">
       <div className="overflow-hidden">

@@ -42,7 +42,6 @@ export const App = () => {
       new URLSearchParams(navigation.location.search).has('sort'),
     [navigation.location]
   );
-  console.log('sorting: ', sorting);
   useEffect(() => {
     document.getElementById('q').value = q;
   }, [q]);
