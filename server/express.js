@@ -15,7 +15,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.static(path.join(__dirname, '../dist/')));
-app.get(/\.(js|css|map|ico)$/, express.static('../dist/'));
 
 app.use('*', handleRequest);
 

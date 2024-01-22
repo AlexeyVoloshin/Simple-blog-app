@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 export const UsersList = ({ users, sorting }) => {
   return (
-    <div className="col-start-1 row-start-3 px-4 py-2 ">
+    <div className="col-start-1 row-start-3 px-4 py-2">
       <div className="overflow-hidden">
         <ul
           role="list"
@@ -23,7 +23,7 @@ export const UsersList = ({ users, sorting }) => {
               {({ isActive }) => (
                 <li
                   className={clsx(
-                    'text-base cursor-pointer my-2 p-2 rounded-md    ',
+                    'text-base cursor-pointer my-2 p-2 rounded-md',
                     {
                       ['bg-simple-blue text-main-white']: isActive,
                       ['hover:bg-simple-blue hover:text-main-white hover:translate-x-0.5']:
