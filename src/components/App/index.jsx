@@ -1,63 +1,83 @@
-import React, { useEffect, Suspense } from "react";
-
-import UsersList from "../UserList";
-import { Loading } from "../Loading";
+import React, { useEffect, Suspense } from 'react';
+import { fetchData } from '../../actions';
+import { Loading } from '../Loading';
 
 import {
-  Form,
+  Outlet,
   useLoaderData,
   useNavigation,
   useSubmit,
-} from "react-router-dom";
-import ErrorBoundary from "../../common/ErrorBoundary";
+} from 'react-router-dom';
 
-import  "./App.styles.scss";
+import ErrorBoundary from '../../common/ErrorBoundary';
+import { TheFooter } from '../TheFooter';
+
+import loadable from '@loadable/component';
+import { SearchForm } from '../SearchForm';
+import { SortForm } from '../SortForm';
+
+const UsersList = loadable(() => import('../UsersList'), {
+  resolveComponent: component => {
+    let UsersList = component.default;
+    return UsersList.Layout;
+  },
+});
 
 export const App = () => {
-  const { users, q } = useLoaderData();
+  const { users, q, sort } = useLoaderData();
   const navigation = useNavigation();
   const submit = useSubmit();
 
   const searching =
     navigation.location &&
-    new URLSearchParams(navigation.location.search).has("q");
+    new URLSearchParams(navigation.location.search).has('q');
 
   useEffect(() => {
-    document.getElementById("q").value = q;
+    document.getElementById('q').value = q;
   }, [q]);
 
-  return(
-  <ErrorBoundary fallback={<p>Something went wrong</p>}>
-    <main className={"main"}>
-      <Form id="search-form" role="search">
-        <input
-          id="q"
-          className={searching ? "loading" : ""}
-          aria-label="Search contacts"
-          placeholder="Search"
-          type="search"
-          name="search_username"
-          defaultValue={q}
-          onChange={(event) => {
-            const isFirstSearch = q == null;
-            submit(event.currentTarget.form, {
-              replace: !isFirstSearch,
-            });
-          }}
+  return (
+    <ErrorBoundary fallback={<p>Something went wrong</p>}>
+      <main className="main grid grid-cols-layout-2 grid-rows-layout-4 gap-y-3 gap-x-8 bg-grayish-white text-black">
+        <SearchForm
+          q={q}
+          searching={searching}
+          submit={submit}
         />
-        <div id="search-spinner" aria-hidden hidden={!searching} />
-        <div className="sr-only" aria-live="polite"></div>
-      </Form>
-      <div>
-        <Form id="search-form" type="radio">
-          <input id="asc" type="submit" name="sort" value="asc" />
-          <input id="desc" type="submit" name="sort" value="desc" />
-        </Form>
-      </div>
-      <br />
-      <Suspense fallback={<Loading />}>
-        {/* <UsersList.component users={users} /> */}
-      </Suspense>
-    </main>
-  </ErrorBoundary>)
+        <SortForm sort={sort} />
+        <Suspense fallback={<Loading />}>
+          <UsersList users={users} />
+        </Suspense>
+        <div className="row-start-[-5] row-span-4  bg-main-white p-5">
+          <Suspense fallback={<Loading />}>
+            <Outlet />
+          </Suspense>
+        </div>
+        <TheFooter />
+      </main>
+    </ErrorBoundary>
+  );
+};
+
+async function loader({ request }) {
+  let users;
+  const url = new URL(request.url);
+
+  const q = url.searchParams.get('search_username');
+  const sort = url.searchParams.get('sort');
+
+  if (q) {
+    users = await fetchData(`users?username_like=^${q}`);
+  } else if (sort) {
+    users = await fetchData(`users?_sort=username&_order=${sort}`);
+  } else {
+    users = await fetchData('users');
+  }
+
+  return { users, q, sort };
+}
+
+export default {
+  Layout: App,
+  loader,
 };

@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 
 export default function IndexPage() {
   return (
-    <p id="zero-state">
-      This is a demo for React Router.
+    <div className="container">
+      <p>This is a Template page.</p>
       <br />
-      Check out{' '}
-      <a href="https://reactrouter.com">the docs at reactrouter.com</a>.
-      <br />
-      <Link to="/">Go to the home page</Link>
-    </p>
+      <div className="text-slate-300 text-gray-700">
+        <Link
+          className="text-base underline decoration-3"
+          to="/">
+          Go to the home page
+        </Link>
+      </div>
+    </div>
   );
 }

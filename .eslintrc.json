@@ -1,0 +1,76 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 12,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": ["react", "react-hooks"],
+    "rules": {
+      "react/jsx-no-bind": [
+        "error",
+        {
+          "allowArrowFunctions": true,
+          "allowBind": false,
+          "ignoreRefs": true
+        }
+      ],
+      "react/no-did-update-set-state": "error",
+      "react/no-unknown-property": "error",
+      "react/no-unused-prop-types": "error",
+      "react/prop-types": "error",
+      "react/react-in-jsx-scope": "error",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
+      "react/no-unescaped-entities": "off",
+      "no-unused-vars": ["warn", { "args": "none", "caughtErrors": "none" }],
+      "prefer-const": "error",
+      "no-console": ["warn", { "allow": ["off", "error"] }],
+      "quotes": ["error", "single"],
+      "jsx-quotes": ["error", "prefer-double"],
+      "indent": ["warn", 2, { "ignoredNodes": ["ConditionalExpression"] }],
+      "max-len": [
+        "error",
+        { "code": 80, "ignoreComments": true, "ignoreStrings": true }
+      ],
+      "comma-dangle": ["error", "always-multiline"],
+      "semi": ["warn", "always"],
+      "import/order": [
+        "error",
+        {
+          "alphabetize": { "order": "asc" },
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            ["index", "sibling"],
+            "object"
+          ],
+          "newlines-between": "always",
+          "pathGroups": [
+            {
+              "pattern": "@prd-crossmip/**",
+              "group": "external",
+              "position": "after"
+            },
+            {
+              "pattern": ".*/**/*.scss",
+              "group": "sibling",
+              "position": "after"
+            }
+          ]
+        }
+      ]
+    }
+  }

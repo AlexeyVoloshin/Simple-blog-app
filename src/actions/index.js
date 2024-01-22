@@ -1,11 +1,16 @@
-import axios from 'axios';
-
 import config from '../services/fetch-config';
 
 const networkRequest = url => {
   return new Promise(async (resolve, reject) => {
-    const response = await axios(url);
-    resolve(response.data);
+    const response = await fetch(url);
+    if (response.status === 404) {
+      reject(new Error('Not Found'));
+    }
+    if (!response.ok) {
+      reject(new Error('Could not fetch project'));
+    }
+    const data = response.json();
+    resolve(data);
   });
 };
 

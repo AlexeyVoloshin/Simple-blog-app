@@ -1,49 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  p::first-letter {
+    text-transform: uppercase;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  input {
+    border: unset;
+  }
 }
 
-html,
-body {
-  height: 100%;
-}
+@layer components {
+  .content {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 
-p {
-  font-size: 20px;
-  font-weight: 700;
-}
+  .main {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 
-.App {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+  #app {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-.main {
-  flex: 1 1 auto;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-}
+  .btn-primary {
+    @apply pointer-events-auto shadow-md rounded-md px-2 py-1 text-center font-medium ring-1 hover:bg-simple-blue hover:text-main-white
+  }
 
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.delete {
-  color: red;
-  cursor: pointer;
-}
-
-.content {
-  /* padding: 20px 0; */
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
+  .container {
+    @apply h-full flex flex-col items-center justify-center
+  }
 }
