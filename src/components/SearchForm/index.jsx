@@ -11,7 +11,7 @@ export const SearchForm = ({ q, searching, submit }) => {
         <TheInput
           id="q"
           label={'Search'}
-          aria-label="Search contacts"
+          aria-label="Search users"
           placeholder="Search"
           type="search"
           name="search_username"

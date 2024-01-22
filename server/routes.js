@@ -7,7 +7,7 @@ import App from '../src/components/App';
 
 const routes = [
   {
-    path: '/*',
+    path: '/',
     element: <App.Layout />,
     errorElement: <ErrorPage />,
     loader: App.loader,

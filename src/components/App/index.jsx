@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect, Suspense, useMemo } from 'react';
 import { fetchData } from '../../actions';
 import { Loading } from '../Loading';
 
@@ -15,6 +15,7 @@ import { TheFooter } from '../TheFooter';
 import loadable from '@loadable/component';
 import { SearchForm } from '../SearchForm';
 import { SortForm } from '../SortForm';
+import clsx from 'clsx';
 
 const UsersList = loadable(() => import('../UsersList'), {
   resolveComponent: component => {
@@ -28,10 +29,20 @@ export const App = () => {
   const navigation = useNavigation();
   const submit = useSubmit();
 
-  const searching =
-    navigation.location &&
-    new URLSearchParams(navigation.location.search).has('q');
+  const searching = useMemo(
+    () =>
+      navigation.location &&
+      new URLSearchParams(navigation.location.search).has('search_username'),
+    [navigation.location]
+  );
 
+  const sorting = useMemo(
+    () =>
+      navigation.location &&
+      new URLSearchParams(navigation.location.search).has('sort'),
+    [navigation.location]
+  );
+  console.log('sorting: ', sorting);
   useEffect(() => {
     document.getElementById('q').value = q;
   }, [q]);
@@ -44,11 +55,23 @@ export const App = () => {
           searching={searching}
           submit={submit}
         />
-        <SortForm sort={sort} />
+        <SortForm
+          sort={sort}
+          sorting={sorting || searching}
+        />
         <Suspense fallback={<Loading />}>
-          <UsersList users={users} />
+          <UsersList
+            users={users}
+            sorting={sorting || searching}
+          />
         </Suspense>
-        <div className="row-start-[-5] row-span-4  bg-main-white p-5">
+        <div
+          className={clsx(
+            'row-start-[-5] row-span-4  bg-main-white p-5 relative',
+            {
+              ['animate-pulse']: navigation.state === 'loading',
+            }
+          )}>
           <Suspense fallback={<Loading />}>
             <Outlet />
           </Suspense>

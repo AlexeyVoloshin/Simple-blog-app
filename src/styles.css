@@ -77,8 +77,12 @@
     flex-direction: column;
   }
 
+  .noHover {
+    pointer-events: none;
+  }
+
   .btn-primary {
-    @apply pointer-events-auto shadow-md rounded-md px-2 py-1 text-center font-medium ring-1 hover:bg-simple-blue hover:text-main-white
+    @apply disabled:noHover disabled:bg-[#000]/65 disabled:text-main-white/65 pointer-events-auto shadow-md rounded-md px-2 py-1 text-center font-medium ring-1 hover:bg-simple-blue hover:text-main-white
   }
 
   .container {
