@@ -66,7 +66,7 @@ export const App = () => {
         </Suspense>
         <div
           className={clsx(
-            'row-start-[-5] row-span-4  bg-main-white p-5 relative',
+            'container row-start-[-5] row-span-4  bg-main-white relative',
             {
               ['animate-pulse']: navigation.state === 'loading',
             }

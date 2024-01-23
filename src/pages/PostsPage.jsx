@@ -13,12 +13,12 @@ export const PostsPage = () => {
   };
 
   return (
-    <div className="h-full">
+    <div className="w-full h-full relative">
       <div
         role="button"
         tabIndex="0"
         onClick={prevPage}
-        className="text-regal-blue">
+        className="text-regal-blue absolute top-7 left-0">
         <Icons.ArrowIcon />
       </div>
       <div className="h-full px-8 py-6 flex flex-col items-center ">

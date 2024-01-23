@@ -13,7 +13,7 @@ export const AlbumsPage = () => {
   };
 
   return (
-    <div className="h-full">
+    <div className="w-full h-full">
       <div
         role="button"
         tabIndex="0"
