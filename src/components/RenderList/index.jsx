@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 
-import './Render.css';
+import { BodyItem } from './BodyItem';
+import clsx from 'clsx';
+import styles from './Render.module.css';
 
 export const RenderList = ({ data = [] }) => {
-  const [isCollapse, setIsCollapse] = useState(false);
   return (
     <ul
       role="list"
@@ -14,24 +14,11 @@ export const RenderList = ({ data = [] }) => {
         <li
           key={item.id}
           className="list p-2 border-regal-blue  border-b">
-          <p className="normal-case font-medium">{item.title}</p>
-          {item.body && (
-            <>
-              <br />
-              <p
-                className={clsx('line-clamp  normal-case font-medium', {
-                  ['show']: isCollapse,
-                })}>
-                {item.body}
-              </p>
-              <p
-                role="button"
-                onClick={() => setIsCollapse(!isCollapse)}
-                className="hover:text-regal-blue underline  decoration-3 cursor-pointer">
-                {isCollapse ? 'hide more' : 'show more'}
-              </p>
-            </>
-          )}
+          <p className={clsx('normal-case font-medium', styles.typography)}>
+            {item.title}
+          </p>
+          <br />
+          {item.body && <BodyItem text={item.body} />}
         </li>
       ))}
     </ul>

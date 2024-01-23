@@ -13,13 +13,13 @@ export const TheInput = ({
   const InputIcon = showLoader ? Icons.SpinIcon : Icons.SearchIcon;
   return (
     <label className="block ">
-      <span className="block text-sm font-medium text-slate-700">{label}</span>
+      <span className="block text-sm font-medium text-[#000]/65">{label}</span>
       <div className="relative">
         {
           <span
             id="search-spinner"
             aria-hidden
-            className="text-[#b6e4f8] absolute top-[50%] mt-[-10px] px-1"
+            className="text-regal-blue absolute top-[50%] mt-[-10px] px-1"
             hidden={!isIcon}>
             {<InputIcon />}
           </span>

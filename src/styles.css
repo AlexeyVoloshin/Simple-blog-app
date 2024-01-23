@@ -43,10 +43,6 @@
     font-weight: 500;
   }
 
-  p::first-letter {
-    text-transform: uppercase;
-  }
-
   ul {
     list-style: none;
     padding: 0;
@@ -79,6 +75,10 @@
 
   .noHover {
     pointer-events: none;
+  }
+
+  .noItems {
+    @apply text-base text-stone-600 my-2 p-2 italic
   }
 
   .btn-primary {

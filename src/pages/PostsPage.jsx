@@ -25,7 +25,11 @@ export const PostsPage = () => {
         <div className="mb-8">
           <h2>Posts</h2>
         </div>
-        <RenderList data={posts} />
+        {posts?.length ? (
+          <RenderList data={posts} />
+        ) : (
+          <p className="noItems">No Posts</p>
+        )}
       </div>
     </div>
   );
